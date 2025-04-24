@@ -1,11 +1,11 @@
-# Dockerfile optimizado para Laravel + Vite en Render (v5 - Usando start script)
+# Dockerfile optimizado para Laravel + Vite en Render (v6 - PostgreSQL)
 
 # --- Build Stage: PHP Dependencies (Composer) ---
     FROM composer:2 as vendor
     WORKDIR /app
-    COPY database/ database/
+    # No necesitamos copiar 'database/' si no usamos SQLite en el build
     COPY composer.json composer.lock ./
-    COPY package.json package-lock.json ./
+    COPY package.json package-lock.json ./ 
     RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
     
     # --- Build Stage: Frontend Assets (Node + Vite) ---
@@ -22,12 +22,13 @@
     
     COPY --from=composer /usr/bin/composer /usr/local/bin/composer
     
+    # Instalar dependencias PHP y Nginx - ASEGURAR pdo_pgsql, QUITAR pdo_sqlite
     RUN apk add --no-cache \
             nginx \
             supervisor \
             php82-fpm \
             php82-pdo \
-            php82-pdo_sqlite \
+            php82-pdo_pgsql \ 
             php82-tokenizer \
             php82-xml \
             php82-ctype \
@@ -40,17 +41,22 @@
             php82-curl \
             php82-dom \
             php82-session \
+            # Opcional: php82-redis, php82-pcntl
             ;
     
     WORKDIR /var/www/html
     
+    # Copiar archivos de configuración (sin cambios)
     COPY docker/nginx.conf /etc/nginx/nginx.conf
     COPY docker/supervisord.conf /etc/supervisord.conf
     COPY docker/php/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
     
+    # Copiar artefactos de las etapas de build
     COPY --from=vendor /app/vendor/ /var/www/html/vendor/
     COPY --from=frontend /app/public/build/ /var/www/html/public/build/
     COPY --from=frontend /app/public/index.php /var/www/html/public/index.php
+    
+    # Copiar el resto del código de la aplicación (SIN la carpeta database si ya no necesitas SQLite)
     COPY . /var/www/html/
     
     # Ejecutar SOLO composer dump-autoload aquí
@@ -69,13 +75,11 @@
         && chown -R www-data:www-data /var/log/supervisor /var/run \
         && chmod -R 775 /var/log/supervisor /var/run
     
-    # --- Copiar y hacer ejecutable el script de inicio ---
+    # Copiar y hacer ejecutable el script de inicio
     COPY docker/start.sh /usr/local/bin/start-app
     RUN chmod +x /usr/local/bin/start-app
-    # ---------------------------------------------------
     
     EXPOSE 80
     
-    # --- CMD ACTUALIZADO para usar el script de inicio ---
+    # CMD para usar el script de inicio
     CMD ["start-app"]
-    # ---------------------------------------------------
