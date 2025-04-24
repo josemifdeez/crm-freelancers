@@ -1,0 +1,84 @@
+# Laravel Defaults & Community Standards
+/.phpunit.cache
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/app/*.key
+/storage/app/public/*
+!/storage/app/public/.gitignore
+/storage/debugbar/*.json # Añadido para Laravel Debugbar
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/testing/*
+!/storage/framework/testing/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/storage/logs/*.log
+!/storage/logs/.gitignore
+/storage/pail/*      # Añadido para Laravel Pail si lo usas
+!/storage/pail/.gitignore
+/vendor
+.env
+.env.backup
+.env.production # Es bueno ignorar el de producción también
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log* # Añadido comodín *
+yarn-error.log* # Añadido comodín *
+yarn-debug.log* # Añadido
+.phpactor.json
+
+# Editor/IDE specific
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+*.sw? # Vim swap files
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+
+# SQLite Database File (AÑADIDO - Importante si usas SQLite)
+database/*.sqlite
+database/*.sqlite-journal
+
+# Node specific (Complementario a /node_modules)
+pids
+*.pid
+*.seed
+*.pid.lock
+logs # Directorio genérico de logs
+*.log # Todos los archivos .log (excepto los explícitamente permitidos)
+lib-cov # Cobertura
+coverage # Cobertura
+.nyc_output # Cobertura
+*.lcov # Cobertura
+.grunt # Grunt
+bower_components # Bower
+jspm_packages # JSPM
+*.tsbuildinfo # TypeScript Cache
+.npm # Cache NPM
+.eslintcache # Cache ESLint
+.stylelintcache # Cache Stylelint
+.node_repl_history # Historial REPL
+*.tgz # Output de npm pack
+
+# Yarn v2+ (Si aplica)
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*

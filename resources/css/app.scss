@@ -1,0 +1,356 @@
+// resources/css/app.scss
+
+// -------------------------------------
+// Tailwind Imports
+// -------------------------------------
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// -------------------------------------
+// Variables Personalizadas
+// -------------------------------------
+$primary-color: theme('colors.indigo.600');
+$primary-color-hover: theme('colors.indigo.700');
+$danger-color: theme('colors.red.600');
+$danger-color-hover: theme('colors.red.700');
+$danger-bg-hover: theme('colors.red.50');
+$secondary-color: theme('colors.gray.600');
+$border-color: theme('colors.gray.200');
+$bg-subtle: theme('colors.gray.50');
+$text-main: theme('colors.gray.900');
+$text-secondary: theme('colors.gray.600');
+$text-muted: theme('colors.gray.500');
+$text-on-primary: theme('colors.white');
+$default-border-radius: theme('borderRadius.lg');
+
+// -------------------------------------
+// Estilos Base y Generales
+// -------------------------------------
+body {
+    @apply bg-gray-100 text-gray-700 antialiased; // Fondo general y antialiasing
+}
+
+// --- Mensaje Flash ---
+.flash-message-success {
+     @apply mb-6 p-4 border-l-4 rounded-r-md text-sm;
+     border-color: theme('colors.green.500');
+     background-color: theme('colors.green.50');
+     color: theme('colors.green.800');
+}
+
+// -------------------------------------
+// Layout Principal Autenticado
+// -------------------------------------
+.main-navigation {
+    @apply bg-white shadow-sm;
+    .nav-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+    .nav-content { @apply flex justify-between h-16; }
+}
+
+.page-header {
+    @apply bg-white shadow-sm;
+    .header-content { @apply max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8; }
+}
+
+.user-dropdown {
+    .dropdown-trigger-button {
+         @apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white transition ease-in-out duration-150;
+         &:hover { @apply text-gray-700; }
+         &:focus { @apply outline-none ring-2 ring-indigo-500 ring-offset-2; }
+    }
+}
+
+.responsive-nav-menu {
+    .responsive-links-container { @apply pt-2 pb-3 space-y-1; }
+    .responsive-settings {
+        @apply pt-4 pb-1 border-t border-gray-200;
+        .user-info { @apply px-4 mb-3; }
+        .settings-links { @apply mt-3 space-y-1; }
+    }
+}
+
+// -------------------------------------
+// Páginas de Índice (Clientes, Proyectos, Tareas)
+// -------------------------------------
+.index-content-container {
+    @apply p-6 md:p-8 bg-white shadow-lg rounded-lg;
+}
+
+.index-filters-container {
+    @apply flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 mb-6;
+}
+
+.filter-input-group {
+     @apply relative w-full sm:w-auto;
+}
+
+.data-table {
+    @apply min-w-full border border-collapse;
+    border-color: $border-color;
+    thead {
+        background-color: $bg-subtle;
+        th {
+            @apply px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b-2;
+            border-color: $border-color;
+        }
+    }
+    tbody {
+        @apply bg-white divide-y;
+        divide-color: $border-color;
+        tr { @apply hover:bg-gray-50 transition-colors duration-150 ease-in-out; }
+        td { @apply px-6 py-4 text-sm; }
+        .cell-primary { @apply font-medium; color: $text-main; }
+        .cell-secondary { color: $text-secondary; }
+        .cell-muted { color: $text-muted; }
+        .actions-cell { @apply text-right space-x-1; }
+        .empty-row td { @apply px-6 py-12 text-center text-base; color: $text-muted; }
+    }
+}
+
+.action-button { // Para iconos de acción en tablas
+    @apply inline-flex items-center justify-center p-1.5 rounded-md transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2;
+    &--edit {
+        color: $primary-color;
+        @apply hover:bg-indigo-50 focus:ring-indigo-500;
+        &:hover { color: $primary-color-hover; }
+    }
+    &--delete {
+         color: $danger-color;
+         @apply hover:bg-red-50 focus:ring-red-500;
+         &:hover { color: $danger-color-hover; }
+    }
+}
+
+.status-badge { // Para Proyectos
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold capitalize leading-tight;
+    &--pendiente { @apply bg-yellow-100 text-yellow-800; }
+    &--en-curso { @apply bg-blue-100 text-blue-800; }
+    &--finalizado { @apply bg-green-100 text-green-800; }
+    &--finalizada { @apply bg-green-100 text-green-800; }
+    &--default { @apply bg-gray-100 text-gray-800; }
+}
+
+.task-status-badge { // Para Tareas
+     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold capitalize leading-tight;
+    &--pendiente { @apply bg-yellow-100 text-yellow-800; }
+    &--en-curso { @apply bg-blue-100 text-blue-800; }
+    &--finalizado { @apply bg-green-100 text-green-800; }
+    &--finalizada { @apply bg-green-100 text-green-800; }
+    &--default { @apply bg-gray-100 text-gray-800; }
+}
+
+.button-primary-light { // Botón "Crear..." en Índices
+    @apply inline-flex items-center justify-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150;
+    border-color: $primary-color;
+    color: $primary-color;
+    background-color: theme('colors.white');
+    &:hover {
+        background-color: theme('colors.indigo.50');
+        color: $primary-color-hover;
+        border-color: $primary-color-hover;
+    }
+    &:focus {
+        border-color: $primary-color-hover;
+        @apply focus:ring-indigo-500;
+    }
+     svg { @apply h-5 w-5 mr-2; }
+}
+
+.button-primary-soft { // Alternativa al botón "Crear..."
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150;
+    background-color: theme('colors.indigo.100');
+    color: theme('colors.indigo.700');
+    &:hover {
+        background-color: theme('colors.indigo.200');
+        color: theme('colors.indigo.800');
+    }
+    &:focus { @apply focus:ring-indigo-500; }
+     svg { @apply h-5 w-5 mr-2; }
+}
+
+
+// -------------------------------------
+// Dashboard Widgets & Panels
+// -------------------------------------
+.stat-card {
+    @apply bg-white p-5 shadow-md rounded-lg flex justify-between items-center transition-shadow duration-200 ease-in-out hover:shadow-lg;
+    &__main-content { @apply flex items-center space-x-4; }
+    &__icon-wrapper {
+        @apply flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center;
+        &--clients { @apply bg-blue-100 text-blue-600; }
+        &--projects { @apply bg-indigo-100 text-indigo-600; }
+        &--tasks { @apply bg-green-100 text-green-600; }
+    }
+    &__content { @apply flex-grow; }
+    &__value { @apply text-3xl font-bold text-gray-800 block; }
+    &__label { @apply text-sm font-medium text-gray-500; }
+    &__add-button { // Botón '+' dentro de la tarjeta
+        @apply inline-flex items-center justify-center p-1.5 rounded-full text-gray-400 transition-colors duration-150 ease-in-out;
+        @apply hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1;
+        &--clients { @apply focus:ring-blue-500 hover:text-blue-600; }
+        &--projects { @apply focus:ring-indigo-500 hover:text-indigo-600; }
+        &--tasks { @apply focus:ring-green-500 hover:text-green-600; }
+    }
+}
+
+.quick-actions-panel { // Panel para botones de acción rápida del dashboard
+    @apply bg-white p-5 shadow-md rounded-lg;
+    &__title { @apply text-base font-semibold text-gray-700 mb-4 border-b border-gray-200 pb-2; }
+    &__grid { @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4; }
+    .action-button { // Botones con texto e icono '+'
+        @apply w-full inline-flex items-center justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-150 ease-in-out;
+        &--client { @apply bg-blue-600 hover:bg-blue-700 focus:ring-blue-500; }
+        &--project { @apply bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500; }
+        &--task { @apply bg-green-600 hover:bg-green-700 focus:ring-green-500; }
+        svg { @apply h-5 w-5 mr-2; }
+    }
+}
+
+.info-panel { // Panel para listas de información (Próximas Entregas, Tareas Pendientes)
+    @apply bg-white p-5 shadow-md rounded-lg;
+    &__title {
+        @apply text-base font-semibold text-gray-700 mb-4 border-b border-gray-200 pb-2 flex items-center;
+        .title-icon { @apply h-5 w-5 mr-2 text-gray-400; }
+    }
+    &__list { @apply space-y-3; }
+    &__list-item {
+        @apply flex justify-between items-center text-sm border-b border-gray-100 pb-2;
+        &:last-child { @apply border-b-0 pb-0; }
+    }
+    &__item-content {
+        @apply flex-grow mr-4;
+        .item-primary { @apply block font-medium text-gray-800 truncate; }
+        .item-secondary { @apply block text-xs text-gray-500; }
+    }
+    &__item-action { @apply flex-shrink-0; }
+    &__empty-state { @apply text-center text-gray-500 py-6 text-sm; }
+}
+
+.calendar-item { // Elemento en la lista de Próximas Entregas
+    @apply flex items-center space-x-4 border-b border-gray-100 pb-3;
+    &:last-child { @apply border-b-0 pb-0; }
+    &__date {
+        @apply flex-shrink-0 flex flex-col items-center justify-center w-12 h-12 bg-indigo-50 rounded-lg text-indigo-700;
+        .day { @apply block text-xl font-bold -mb-1; }
+        .month { @apply block text-xs font-medium uppercase; }
+    }
+    &__details {
+        @apply flex-grow;
+        .project-name { @apply block font-semibold text-gray-800 text-sm truncate; }
+        .client-name { @apply block text-xs text-gray-500; }
+    }
+    &__action { @apply flex-shrink-0; }
+}
+
+.project-group { // Contenedor para un proyecto y sus tareas en el Dashboard
+    @apply pt-3;
+    &:first-child { @apply pt-0; }
+}
+
+.project-group__header {
+    @apply text-sm font-semibold text-indigo-800 mb-2 flex items-center;
+     .header-icon { @apply h-4 w-4 mr-1.5 text-indigo-400; }
+}
+
+.project-group__task-list {
+     @apply space-y-2 pl-4 border-l border-gray-200 ml-1;
+}
+
+.project-group__task-item {
+    @apply flex justify-between items-center text-sm;
+    .task-description { @apply text-gray-700 mr-2; }
+    .complete-button { // Botón para completar tarea en Dashboard
+        @apply inline-flex items-center justify-center p-1 rounded-full text-green-600 transition-colors duration-150 ease-in-out;
+        @apply hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1;
+         &:disabled { @apply text-gray-300 cursor-not-allowed hover:bg-transparent; }
+    }
+}
+
+
+// -------------------------------------
+// Welcome Page Specific Styles
+// -------------------------------------
+.welcome-page-container {
+    @apply min-h-screen flex flex-col items-center bg-gradient-to-b from-white via-indigo-50 to-white text-gray-800;
+    &::selection { @apply bg-indigo-500 text-white; }
+}
+
+.welcome-header {
+    @apply w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10 relative;
+    nav {
+        a {
+            @apply rounded-md px-3 py-2 text-sm font-medium text-gray-700 ring-1 ring-transparent transition;
+            @apply hover:text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1;
+        }
+    }
+}
+
+.welcome-hero {
+    @apply text-center pt-16 pb-20 sm:pt-24 sm:pb-28 px-4 w-full max-w-4xl mx-auto;
+    &__title { @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-5; }
+    &__subtitle { @apply max-w-xl mx-auto text-base sm:text-lg text-gray-600 mb-10; }
+    &__cta-buttons {
+         @apply flex flex-col sm:flex-row justify-center items-center gap-4;
+         .cta-button {
+            @apply inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-150 w-full sm:w-auto;
+            &--primary {
+                @apply text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500;
+                 svg { @apply h-5 w-5; }
+            }
+            &--secondary { @apply text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500; }
+         }
+    }
+}
+
+.features-section {
+    @apply w-full bg-white py-16 sm:py-20;
+    .features-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+    &__intro {
+        @apply text-center max-w-2xl mx-auto mb-12 lg:mb-16;
+        .intro-eyebrow { @apply text-indigo-600 font-semibold text-sm uppercase tracking-wide mb-1; }
+        .intro-title { @apply text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl; }
+        .intro-description { @apply mt-4 text-lg text-gray-600; }
+    }
+    &__grid { @apply grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10; }
+}
+
+.feature-card {
+    @apply text-left p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-200;
+
+    // --- icon-wrapper AHORA SOLO CON ESTILOS BASE ---
+    &__icon-wrapper {
+        @apply w-12 h-12 rounded-lg flex items-center justify-center mb-5;
+        // Ya NO definimos los colores aquí (&--clients, etc. eliminados)
+    }
+    // --- Fin de la simplificación ---
+
+    &__title {
+         @apply text-lg font-semibold text-gray-900 mb-2;
+    }
+
+    &__description {
+         @apply text-gray-600 text-sm leading-relaxed;
+    }
+}
+
+.tech-stack-section {
+    @apply w-full bg-gradient-to-b from-indigo-50 via-white to-white py-16 sm:py-20;
+     .tech-stack-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+    &__title { @apply text-3xl font-semibold text-center text-gray-800 mb-12 lg:mb-16; }
+    &__grid { @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8; }
+}
+
+.tech-card {
+    @apply text-center bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center;
+    &__logo {
+        @apply h-12 mb-4;
+        img { @apply h-full w-auto object-contain; }
+    }
+    &__name { @apply font-semibold text-gray-800 mb-1; }
+    &__description { @apply text-xs text-gray-500; }
+}
+
+.welcome-footer {
+     @apply w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-center text-sm text-gray-500 mt-auto;
+}
