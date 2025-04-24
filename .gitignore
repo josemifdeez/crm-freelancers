@@ -25,6 +25,7 @@
 !/storage/pail/.gitignore
 /vendor
 .env
+.env.example
 .env.backup
 .env.production # Es bueno ignorar el de producción también
 .phpunit.result.cache
