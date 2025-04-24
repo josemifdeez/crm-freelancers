@@ -1,9 +1,9 @@
-# Dockerfile optimizado para Laravel + Vite en Render (v6 - PostgreSQL)
+# Dockerfile optimizado para Laravel + Vite en Render (v7 - Fix PDO PgSQL Driver)
 
 # --- Build Stage: PHP Dependencies (Composer) ---
     FROM composer:2 as vendor
     WORKDIR /app
-    # No necesitamos copiar 'database/' si no usamos SQLite en el build
+    # No copiamos 'database/' si usamos DB externa
     COPY composer.json composer.lock ./
     COPY package.json package-lock.json ./ 
     RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
@@ -22,10 +22,13 @@
     
     COPY --from=composer /usr/bin/composer /usr/local/bin/composer
     
-    # Instalar dependencias PHP y Nginx - ASEGURAR pdo_pgsql, QUITAR pdo_sqlite
+    # --- Instalar dependencias PHP y Nginx (Revisado para pdo_pgsql) ---
     RUN apk add --no-cache \
             nginx \
             supervisor \
+            postgresql-libs \ 
+            # Paquetes PHP 8.2
+            php82 \         
             php82-fpm \
             php82-pdo \
             php82-pdo_pgsql \ 
@@ -41,8 +44,12 @@
             php82-curl \
             php82-dom \
             php82-session \
+            # Quita o comenta pdo_sqlite y pdo_mysql si no los usas
+            # php82-pdo_sqlite \
+            # php82-pdo_mysql \
             # Opcional: php82-redis, php82-pcntl
             ;
+    # --- Fin de la sección de dependencias ---
     
     WORKDIR /var/www/html
     
@@ -56,7 +63,7 @@
     COPY --from=frontend /app/public/build/ /var/www/html/public/build/
     COPY --from=frontend /app/public/index.php /var/www/html/public/index.php
     
-    # Copiar el resto del código de la aplicación (SIN la carpeta database si ya no necesitas SQLite)
+    # Copiar el resto del código de la aplicación
     COPY . /var/www/html/
     
     # Ejecutar SOLO composer dump-autoload aquí
