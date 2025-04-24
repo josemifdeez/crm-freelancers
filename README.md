@@ -77,8 +77,6 @@
 
 7.  Accede a la aplicación: Abre tu navegador y ve a la dirección indicada por `php artisan serve` (normalmente `http://127.0.0.1:8000`).
 
-<<<<<<< HEAD
 8.  **Regístrate** como nuevo usuario para comenzar.
-=======
-8.  **Regístrate** como nuevo usuario para comenzar.
->>>>>>> 6368338b3432fae7cc67ee0b4753970c969144c0
+
+
