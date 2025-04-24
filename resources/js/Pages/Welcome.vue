@@ -12,7 +12,7 @@ import LaravelLogoRed from '@/Components/Logos/LaravelLogoRed.vue'; // Logo rojo
 import VueLogo from '@/Components/Logos/VueLogo.vue';
 import TailwindLogo from '@/Components/Logos/TailwindLogo.vue';
 import SassLogo from '@/Components/Logos/SassLogo.vue';
-import SqliteLogo from '@/Components/Logos/SQLiteLogo.vue';
+import SQLogo from '@/Components/Logos/SQLogo.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -32,7 +32,7 @@ const features = [
 const techStack = [
     { name: 'Laravel 12', description: 'Backend robusto y escalable.', logoComponent: LaravelLogoRed }, // Usa el logo rojo específico
     { name: 'Vue.js 3', description: 'Interfaz reactiva y moderna.', logoComponent: VueLogo },
-    { name: 'SQLite', description: 'Base de datos ligera integrada.', logoComponent: SqliteLogo },
+    { name: 'PostgreSQL', description: 'Base de datos relacional avanzada y robusta.', logoComponent: SQLogo },
     { name: 'Tailwind CSS', description: 'Framework CSS de utilidad.', logoComponent: TailwindLogo },
     { name: 'Sass', description: 'Preprocesador CSS potente.', logoComponent: SassLogo },
 ];
