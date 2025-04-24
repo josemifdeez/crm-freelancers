@@ -39,7 +39,7 @@ const techStack = [
 </script>
 
 <template>
-    <Head title="Bienvenido a Mini CRM Freelancer" />
+    <Head title="Bienvenido a CRM Freelancer" />
 
     <!-- Contenedor principal con clase SCSS -->
     <div class="welcome-page-container">
@@ -77,7 +77,7 @@ const techStack = [
                  <p class="welcome-hero__subtitle">Gestiona tus clientes, proyectos y tareas de forma simple y profesional. Menos caos, más productividad.</p>
                  <div class="welcome-hero__cta-buttons">
                      <Link v-if="canRegister" :href="route('register')">
-                         <button type="button" class="cta-button cta-button--primary">
+                         <button type="button" class="cta-button cta-button--primary bg-gradient-to-r from-indigo-500 to-indigo-700 font-semibold hover:from-indigo-600 hover:to-indigo-800">
                             Comenzar Gratis
                             <ArrowRightIcon class="ml-2"/>
                          </button>
@@ -134,7 +134,7 @@ const techStack = [
 
         <!-- Footer con enlace al porfolio -->
         <footer class="welcome-footer">
-             {{ new Date().getFullYear() }} © Mini CRM Freelancer realizado por
+             {{ new Date().getFullYear() }} © CRM Freelancer realizado por
              <a href="https://josemifdeez.dev" target="_blank" rel="noopener noreferrer" class="font-medium text-indigo-600 hover:text-indigo-800 hover:underline">
                  josemifdeez.dev
              </a>
