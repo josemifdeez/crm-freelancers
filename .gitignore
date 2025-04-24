@@ -53,8 +53,8 @@ Thumbs.db
 ehthumbs.db
 
 # SQLite Database File (AÑADIDO - Importante si usas SQLite)
-database/*.sqlite
-database/*.sqlite-journal
+# database/*.sqlite
+# database/*.sqlite-journal
 
 # Node specific (Complementario a /node_modules)
 pids
