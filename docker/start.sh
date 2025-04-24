@@ -4,7 +4,7 @@ set -e # Salir inmediatamente si un comando falla
 # --- Ejecutar migraciones ANTES de cualquier optimización ---
 echo "Running database migrations FIRST..."
 # Asumiendo que tienes las migraciones _create_sessions_table y _create_cache_table
-php artisan migrate --force --seed # Añade --seed si tienes seeders y quieres ejecutarlos
+php artisan migrate --force # Añade --seed si tienes seeders y quieres ejecutarlos
 
 # --- Ejecutar optimizaciones DESPUÉS de migrar ---
 echo "Running Laravel optimization commands..."
