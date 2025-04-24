@@ -30,7 +30,7 @@ const features = [
 
 // Array de tecnologías usadas
 const techStack = [
-    { name: 'Laravel 10', description: 'Backend robusto y escalable.', logoComponent: LaravelLogoRed }, // Usa el logo rojo específico
+    { name: 'Laravel 12', description: 'Backend robusto y escalable.', logoComponent: LaravelLogoRed }, // Usa el logo rojo específico
     { name: 'Vue.js 3', description: 'Interfaz reactiva y moderna.', logoComponent: VueLogo },
     { name: 'SQLite', description: 'Base de datos ligera integrada.', logoComponent: SqliteLogo },
     { name: 'Tailwind CSS', description: 'Framework CSS de utilidad.', logoComponent: TailwindLogo },
