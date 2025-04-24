@@ -1,6 +1,6 @@
 # 📊 Mini CRM para Freelancers
 
-🔗 [Ver página web del proyecto](https://josemifdeez.github.io/stardew-like-game/)
+🔗 [Ver página web del proyecto](https://crm-freelancers.onrender.com/)
 
 **Una aplicación web SPA sencilla y eficiente para ayudar a los freelancers a gestionar sus clientes, proyectos y tareas diarias.**
 
