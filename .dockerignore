@@ -1,0 +1,78 @@
+# Ignorar el propio contexto de Git
+.git
+.github
+
+# Ignorar dependencias (se instalan DENTRO del contenedor)
+node_modules
+vendor
+
+# Ignorar archivos de entorno locales/secretos
+.env
+.env.*
+!.env.example # Permitir el archivo de ejemplo
+
+# Ignorar logs y archivos temporales de storage
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+storage/logs/*.log
+storage/debugbar/*.json
+storage/pail/*
+
+# Ignorar caché y resultados de pruebas
+.phpunit.cache
+.phpunit.result.cache
+coverage
+*.lcov
+.nyc_output
+
+# Ignorar archivos de SO y editores
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.lnk
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+*.sw?
+
+# Ignorar otros archivos de desarrollo local
+Homestead.json
+Homestead.yaml
+.phpactor.json
+
+# Ignorar archivos de log de Node/Yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs
+
+# Ignorar caché de Node/Bundlers
+.npm
+.cache
+.parcel-cache
+*.tsbuildinfo
+
+# Ignorar output de npm pack
+*.tgz
+
+# Ignorar Yarn v2+ (si aplica)
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Ignorar assets compilados (si se generan en una etapa ANTERIOR del Dockerfile)
+# Si tu Dockerfile compila en una etapa y copia desde ahí, puedes ignorar esto.
+# Si copias todo y LUEGO compilas dentro, no lo ignores.
+# En nuestro caso, compilamos en etapa 'frontend', así que podemos ignorar public/build local.
+# public/build
+
+# Dockerfile y config SÍ deben ir al contexto, así que NO los ignores aquí
+# Dockerfile
+# docker/
